@@ -34,5 +34,12 @@ public class Day01 extends AOCPuzzle
 				changes++;
 
 		lap(changes);
+
+		//PART 2 even faster solution! via SkillazHDTV from a comment on my YouTube video
+		int numberOfIncreases = 0;
+		for(int i = 3; i < input.size(); i++)
+			numberOfIncreases += depths.get(i) > depths.get(i - 3) ? 1 : 0;
+
+		lap(numberOfIncreases);
 	}
 }
