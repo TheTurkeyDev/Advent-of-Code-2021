@@ -24,22 +24,20 @@ public class Day04 extends AOCPuzzle
 			markBoards(boards, num);
 
 			//Check winning board
-			int[][] boardWinner = null;
+			boolean done = false;
 			for(int[][] board : boards)
 			{
 				if(isBoardWon(board))
 				{
-					boardWinner = board;
+					long leftOver = calcLeftover(board);
+					lap(leftOver * num);
+					done = true;
 					break;
 				}
 			}
 
-			if(boardWinner != null)
-			{
-				long leftOver = calcLeftover(boardWinner);
-				lap(leftOver * num);
+			if(done)
 				break;
-			}
 		}
 
 		//PART 2
@@ -70,18 +68,18 @@ public class Day04 extends AOCPuzzle
 	public long calcLeftover(int[][] board)
 	{
 		long leftOver = 0;
-		for(int row = 0; row < 5; row++)
-			for(int col = 0; col < 5; col++)
-				if(board[row][col] != -1)
-					leftOver += board[row][col];
+		for(int[] row : board)
+			for(int col : row)
+				if(col != -1)
+					leftOver += col;
 		return leftOver;
 	}
 
 	public void markBoards(List<int[][]> boards, int num)
 	{
 		for(int[][] board : boards)
-			for(int row = 0; row < 5; row++)
-				for(int col = 0; col < 5; col++)
+			for(int row = 0; row < board.length; row++)
+				for(int col = 0; col < board[row].length; col++)
 					if(board[row][col] == num)
 						board[row][col] = -1;
 	}
