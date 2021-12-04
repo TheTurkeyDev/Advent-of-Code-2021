@@ -21,11 +21,7 @@ public class Day04 extends AOCPuzzle
 		for(String numStr : randNums)
 		{
 			int num = Integer.parseInt(numStr);
-			for(int[][] board : boards)
-				for(int row = 0; row < 5; row++)
-					for(int col = 0; col < 5; col++)
-						if(board[row][col] == num)
-							board[row][col] = -1;
+			markBoards(boards, num);
 
 			//Check winning board
 			int[][] boardWinner = null;
@@ -40,12 +36,7 @@ public class Day04 extends AOCPuzzle
 
 			if(boardWinner != null)
 			{
-				long leftOver = 0;
-				for(int row = 0; row < 5; row++)
-					for(int col = 0; col < 5; col++)
-						if(boardWinner[row][col] != -1)
-							leftOver += boardWinner[row][col];
-
+				long leftOver = calcLeftover(boardWinner);
 				lap(leftOver * num);
 				break;
 			}
@@ -57,11 +48,7 @@ public class Day04 extends AOCPuzzle
 		for(String numStr : randNums)
 		{
 			int num = Integer.parseInt(numStr);
-			for(int[][] board : boards)
-				for(int row = 0; row < 5; row++)
-					for(int col = 0; col < 5; col++)
-						if(board[row][col] == num)
-							board[row][col] = -1;
+			markBoards(boards, num);
 
 			//Check winning board
 			for(int k = boards.size() - 1; k >= 0; k--)
@@ -70,13 +57,7 @@ public class Day04 extends AOCPuzzle
 				{
 					if(boards.size() == 1)
 					{
-						int[][] boardWinner = boards.get(0);
-						long leftOver = 0;
-						for(int row = 0; row < 5; row++)
-							for(int col = 0; col < 5; col++)
-								if(boardWinner[row][col] != -1)
-									leftOver += boardWinner[row][col];
-
+						long leftOver = calcLeftover(boards.get(0));
 						lap(leftOver * num);
 						return;
 					}
@@ -84,6 +65,25 @@ public class Day04 extends AOCPuzzle
 				}
 			}
 		}
+	}
+
+	public long calcLeftover(int[][] board)
+	{
+		long leftOver = 0;
+		for(int row = 0; row < 5; row++)
+			for(int col = 0; col < 5; col++)
+				if(board[row][col] != -1)
+					leftOver += board[row][col];
+		return leftOver;
+	}
+
+	public void markBoards(List<int[][]> boards, int num)
+	{
+		for(int[][] board : boards)
+			for(int row = 0; row < 5; row++)
+				for(int col = 0; col < 5; col++)
+					if(board[row][col] == num)
+						board[row][col] = -1;
 	}
 
 	public List<int[][]> genBoards(List<String> input)
