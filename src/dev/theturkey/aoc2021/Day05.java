@@ -21,9 +21,7 @@ public class Day05 extends AOCPuzzle
 			String[] linePoints = s.split(" -> ");
 			String[] point1 = linePoints[0].split(",");
 			String[] point2 = linePoints[1].split(",");
-			Point p1 = new Point(Integer.parseInt(point1[0]), Integer.parseInt(point1[1]));
-			Point p2 = new Point(Integer.parseInt(point2[0]), Integer.parseInt(point2[1]));
-			inputLines.put(p1, p2);
+			inputLines.put(new Point(point1), new Point(point2));
 		}
 
 		//Part 1
@@ -34,30 +32,20 @@ public class Day05 extends AOCPuzzle
 			Point p2 = line.getValue();
 			if(p1.y == p2.y)
 			{
-				int xMin = Math.min(p1.x, p2.x);
-				for(int i = xMin; i <= Math.max(p1.x, p2.x); i++)
-				{
-					Point p = new Point(i, p1.y);
-					points.put(p, points.getOrDefault(p, 0) + 1);
-				}
+				for(int i = Math.min(p1.x, p2.x); i <= Math.max(p1.x, p2.x); i++)
+					points.merge(new Point(i, p1.y), 1, Integer::sum);
 			}
 			else if(p1.x == p2.x)
 			{
-				int yMin = Math.min(p1.y, p2.y);
-				for(int i = yMin; i <= Math.max(p1.y, p2.y); i++)
-				{
-					Point p = new Point(p1.x, i);
-					points.put(p, points.getOrDefault(p, 0) + 1);
-				}
+				for(int i = Math.min(p1.y, p2.y); i <= Math.max(p1.y, p2.y); i++)
+					points.merge(new Point(p1.x, i), 1, Integer::sum);
 			}
 		}
 
 		int count = 0;
-		for(Point p : points.keySet())
-		{
-			if(points.get(p) > 1)
+		for(int visits : points.values())
+			if(visits > 1)
 				count++;
-		}
 		lap(count);
 
 
@@ -69,49 +57,41 @@ public class Day05 extends AOCPuzzle
 			Point p2 = line.getValue();
 			if(p1.y == p2.y)
 			{
-				int xMin = Math.min(p1.x, p2.x);
-				for(int i = xMin; i <= Math.max(p1.x, p2.x); i++)
-				{
-					Point p = new Point(i, p1.y);
-					points.put(p, points.getOrDefault(p, 0) + 1);
-				}
+				for(int i = Math.min(p1.x, p2.x); i <= Math.max(p1.x, p2.x); i++)
+					points.merge(new Point(i, p1.y), 1, Integer::sum);
 			}
 			else if(p1.x == p2.x)
 			{
-				int yMin = Math.min(p1.y, p2.y);
-				for(int i = yMin; i <= Math.max(p1.y, p2.y); i++)
-				{
-					Point p = new Point(p1.x, i);
-					points.put(p, points.getOrDefault(p, 0) + 1);
-				}
+				for(int i = Math.min(p1.y, p2.y); i <= Math.max(p1.y, p2.y); i++)
+					points.merge(new Point(p1.x, i), 1, Integer::sum);
 			}
 			else
 			{
-				int steps = Math.abs(p2.x - p1.x);
 				int xDir = p2.x - p1.x > 0 ? 1 : -1;
 				int yDir = p2.y - p1.y > 0 ? 1 : -1;
-				for(int i = 0; i <= steps; i++)
-				{
-					Point p = new Point(p1.x + (xDir * i), p1.y + (yDir * i));
-					points.put(p, points.getOrDefault(p, 0) + 1);
-				}
+				for(int i = 0; i <= Math.abs(p2.x - p1.x); i++)
+					points.merge(new Point(p1.x + (xDir * i), p1.y + (yDir * i)), 1, Integer::sum);
 			}
 		}
 
 		count = 0;
-		for(Point p : points.keySet())
-		{
-			if(points.get(p) > 1)
+		for(int visits : points.values())
+			if(visits > 1)
 				count++;
-		}
-		lap(count);
 
+		lap(count);
 	}
 
 	private static class Point
 	{
 		public int x;
 		public int y;
+
+		public Point(String[] vals)
+		{
+			this.x = Integer.parseInt(vals[0]);
+			this.y = Integer.parseInt(vals[1]);
+		}
 
 		public Point(int x, int y)
 		{
