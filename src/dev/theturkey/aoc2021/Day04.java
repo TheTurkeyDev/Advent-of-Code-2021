@@ -157,9 +157,6 @@ public class Day04 extends AOCPuzzle
 				return true;
 		}
 
-		if(board[0][0] == -1 && board[1][1] == -1 && board[2][2] == -1 && board[3][3] == -1 && board[4][4] == -1)
-			return true;
-
-		return board[0][4] == -1 && board[1][3] == -1 && board[2][2] == -1 && board[3][1] == -1 && board[4][0] == -1;
+		return false;
 	}
 }
