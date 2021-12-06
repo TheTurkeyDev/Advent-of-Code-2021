@@ -33,12 +33,11 @@ public class Day06 extends AOCPuzzle
 		lap(sum);
 
 		//PART 2
-		copy = new HashMap<>(fish);
 		for(int day = 0; day < 256; day++)
-			tick(copy);
+			tick(fish);
 
 		sum = 0;
-		for(long fishCount : copy.values())
+		for(long fishCount : fish.values())
 			sum += fishCount;
 		lap(sum);
 	}
