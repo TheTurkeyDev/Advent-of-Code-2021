@@ -17,7 +17,8 @@ public class Day10 extends AOCPuzzle
 		long score = 0;
 		for(int i = input.size() - 1; i >= 0; i--)
 		{
-			List<Character> queue = new ArrayList<>();
+			// It's a stack, not a queue
+			List<Character> stack = new ArrayList<>();
 			for(char c : input.get(i).toCharArray())
 			{
 				boolean exit = false;
@@ -27,31 +28,31 @@ public class Day10 extends AOCPuzzle
 					case '[':
 					case '{':
 					case '<':
-						queue.add(c);
+						stack.add(c);
 						break;
 					case ')':
-						if(queue.remove(queue.size() - 1) != '(')
+						if(stack.remove(stack.size() - 1) != '(')
 						{
 							score += 3;
 							exit = true;
 						}
 						break;
 					case ']':
-						if(queue.remove(queue.size() - 1) != '[')
+						if(stack.remove(stack.size() - 1) != '[')
 						{
 							score += 57;
 							exit = true;
 						}
 						break;
 					case '}':
-						if(queue.remove(queue.size() - 1) != '{')
+						if(stack.remove(stack.size() - 1) != '{')
 						{
 							score += 1197;
 							exit = true;
 						}
 						break;
 					case '>':
-						if(queue.remove(queue.size() - 1) != '<')
+						if(stack.remove(stack.size() - 1) != '<')
 						{
 							score += 25137;
 							exit = true;
@@ -72,7 +73,7 @@ public class Day10 extends AOCPuzzle
 		List<Long> scores = new ArrayList<>();
 		for(int i = input.size() - 1; i >= 0; i--)
 		{
-			List<Character> queue = new ArrayList<>();
+			List<Character> stack = new ArrayList<>();
 			for(char c : input.get(i).toCharArray())
 			{
 				switch(c)
@@ -81,21 +82,21 @@ public class Day10 extends AOCPuzzle
 					case '[':
 					case '{':
 					case '<':
-						queue.add(c);
+						stack.add(c);
 						break;
 					case ')':
 					case ']':
 					case '}':
 					case '>':
-						queue.remove(queue.size() - 1);
+						stack.remove(stack.size() - 1);
 						break;
 				}
 			}
 
 			score = 0;
-			while(queue.size() > 0)
+			while(stack.size() > 0)
 			{
-				char c = queue.remove(queue.size() - 1);
+				char c = stack.remove(stack.size() - 1);
 				score *= 5;
 				switch(c)
 				{
