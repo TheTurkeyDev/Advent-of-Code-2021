@@ -101,16 +101,4 @@ public class Day11 extends AOCPuzzle
 				if(octopi[i][j] > 9)
 					octopi[i][j] = 0;
 	}
-
-	public static class Point
-	{
-		public int row;
-		public int col;
-
-		public Point(int row, int col)
-		{
-			this.row = row;
-			this.col = col;
-		}
-	}
 }
