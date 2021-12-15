@@ -27,4 +27,13 @@ public class Point
 	{
 		return Objects.hash(row, col);
 	}
+
+	@Override
+	public String toString()
+	{
+		return "Point{" +
+				"row=" + row +
+				", col=" + col +
+				'}';
+	}
 }
