@@ -26,6 +26,8 @@ public class Day15 extends AOCPuzzle
 			for(int col = 0; col < s.length(); col++)
 			{
 				int value = s.charAt(col) - 48;
+				map[row][col] = value;
+
 				for(int rowRep = 0; rowRep < 5; rowRep++)
 				{
 					for(int colRep = 0; colRep < 5; colRep++)
@@ -35,11 +37,8 @@ public class Day15 extends AOCPuzzle
 							newVal -= 9;
 
 						map2[row + (rowRep * input.size())][col + (colRep * s.length())] = newVal;
-						if(rowRep == 0 && colRep == 0)
-							map[row][col] = newVal;
 					}
 				}
-
 			}
 		}
 

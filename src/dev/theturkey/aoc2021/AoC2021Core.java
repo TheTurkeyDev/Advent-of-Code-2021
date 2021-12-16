@@ -18,8 +18,8 @@ public class AoC2021Core
 		//new Day12();
 		//new Day13();
 		//new Day14();
-		new Day15();
-		//new Day16();
+		//new Day15();
+		new Day16();
 		//new Day17();
 		//new Day18();
 		//new Day19();
