@@ -27,7 +27,7 @@ public class AoC2021Core
 		//new Day21();
 		//new Day22();
 		//new Day23();
-		//new Day24();
-		new Day25();
+		new Day24();
+		//new Day25();
 	}
 }
