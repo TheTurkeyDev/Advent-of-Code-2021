@@ -27,10 +27,16 @@ public class Point3
 		return new Point3(this.x - p.x, this.y - p.y, this.z - p.z);
 	}
 
-	public Point3 offset(Point3 offset)
+	public Point3 add(Point3 p)
 	{
-		return new Point3(this.x + offset.x, this.y + offset.y, this.z + offset.z);
+		return new Point3(this.x + p.x, this.y + p.y, this.z + p.z);
 	}
+
+	public Point3 invert()
+	{
+		return new Point3(-this.x, -this.y, -this.z);
+	}
+
 
 	@Override
 	public boolean equals(Object o)
