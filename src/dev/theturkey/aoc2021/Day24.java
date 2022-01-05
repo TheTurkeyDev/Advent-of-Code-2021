@@ -148,7 +148,7 @@ public class Day24 extends AOCPuzzle
 		// n1 + 7 = n12 -> largest = 2 & 9, smallest = 1 & 8
 
 		//12__________99 -> largest
-		//11__________89 -> largest
+		//11__________89 -> smallest
 	}
 
 	//12394998949199
